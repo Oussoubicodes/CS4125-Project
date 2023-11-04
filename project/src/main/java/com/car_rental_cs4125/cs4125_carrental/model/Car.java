@@ -1,5 +1,6 @@
 package com.car_rental_cs4125.cs4125_carrental.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,6 +14,7 @@ public class Car{
     private int id;
     private String regNumber;
     private String make;
+    @Column(name = "`year`")
     private int year;
     private String model;
     private String fuelType;

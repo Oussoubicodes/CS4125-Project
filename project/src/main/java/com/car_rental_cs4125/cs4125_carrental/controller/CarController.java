@@ -11,7 +11,6 @@ import java.util.List;
 public class CarController {
     private List<Car> availableCars;
     //private List<CarReservation> reservation; 
-
     public void addCar(Car car){
         availableCars.add(car);
     }
@@ -25,9 +24,15 @@ public class CarController {
         this.car = newCar;
     }*/
 
-   @GetMapping("/browse")
-    public ModelAndView viewCar(Car car){
+    @GetMapping("/browse")
+    public ModelAndView viewCar(Car car) {
         ModelAndView modelAndView = new ModelAndView();
+        // Set the view name
+        modelAndView.setViewName("carDetailsView"); // Replace "carDetailsView" with your actual view name
+        // Add the 'Car' object to the model if needed
+        modelAndView.addObject("car", car); // Assuming 'car' is the attribute name
+        return modelAndView;
     }
+    
 
 }
