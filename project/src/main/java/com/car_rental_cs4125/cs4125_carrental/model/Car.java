@@ -18,7 +18,7 @@ public class Car{
     private String transmission;
     private int mileage;
 
-    public Car(String brand, String type, String model, String regNumber, int year, String fuelType, String transmission, int mileage) {
+    public Car(int id, String brand, String type, String model, String regNumber, int year, String fuelType, String transmission, int mileage) {
         this.brand = brand;
         this.type = type;
         this.model = model;
