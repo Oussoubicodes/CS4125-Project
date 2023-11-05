@@ -1,5 +1,6 @@
 package com.car_rental_cs4125.cs4125_carrental.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,28 +13,13 @@ public class Car{
 
     private int id;
     private String regNumber;
-    private String brand;
-    private String type;
+    private String make;
+    @Column(name = "`year`")
     private int year;
     private String model;
     private String fuelType;
     private String transmission;
     private int mileage;
-
-    public Car(String brand, String type, String model, String regNumber, int year, String fuelType, String transmission, int mileage) {
-        this.brand = brand;
-        this.type = type;
-        this.model = model;
-        this.regNumber = regNumber;
-        this.year = year;
-        this.fuelType= fuelType;
-        this.transmission = transmission;
-        this.mileage = mileage;
-    }
-
-    public Car(){
-
-    }
 
     //Set methods
     public void setId(int id){
@@ -44,8 +30,8 @@ public class Car{
         this.regNumber = regNumber;
     }
 
-    public void setBrand(String brand){
-        this.brand = brand;
+    public void setId(String make){
+        this.make = make;
     }
 
     public void setYear(int year){
@@ -81,8 +67,8 @@ public class Car{
         return this.year;
     }
 
-    public String getBrand(){
-        return this.brand;
+    public String getMake(){
+        return this.make;
     }
 
     public String getModel(){

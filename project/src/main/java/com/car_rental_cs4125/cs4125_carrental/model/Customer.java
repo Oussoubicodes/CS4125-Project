@@ -1,28 +1,24 @@
 package com.car_rental_cs4125.cs4125_carrental.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class Customer {
-@Id
-@GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    private Long id;
 
-private int id;
-private String name;
-private String username;
-private String password;
-private String email;
-private String licenseDetails;
+    private String name;
+    private String username;
+    private String password;
+    private int phoneNumber;
+    private String licenseDetails;
 
-
-    public int getId() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -35,7 +31,12 @@ private String licenseDetails;
     }
 
     public String getUsername() {
-        return this.username;
+        if (username == null) {
+            // Log a message or throw an exception to indicate the issue
+            // This helps to identify if the username is unexpectedly null
+            throw new NullPointerException("Username is unexpectedly null");
+        }
+        return username;
     }
 
     public void setUsername(String username) {
@@ -50,12 +51,12 @@ private String licenseDetails;
         this.password = password;
     }
 
-    public String getEmail() {
-        return this.email;
+    public int getPhoneNumber() {
+        return this.phoneNumber;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getLicenseDetails() {
@@ -66,5 +67,11 @@ private String licenseDetails;
         this.licenseDetails = licenseDetails;
     }
 
+
+    public Customer() {
+    }
+
+    public Customer(String username, String password) {
+    }
     
 }
