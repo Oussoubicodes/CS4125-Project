@@ -72,6 +72,7 @@ public class Customer {
     }
 
     public Customer(String username, String password) {
+        //empty constructor to handle Customer(String, String)
     }
     
 }
