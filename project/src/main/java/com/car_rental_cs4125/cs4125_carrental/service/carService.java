@@ -16,27 +16,35 @@ public class carService {
 
     private static final String CSV_CARFILE = "C:\\Users\\ameen\\CS4125(2)\\CS4125-Project\\project\\src\\main\\resources\\carList.csv";
 
-    public static List<Car> getAllAvailableCars() throws IOException{
+    public static List<Car> getAvailableCars(String brand,String type, String transmission,String fuelType,int minYear,int maxYear, int minMileage, int maxMileage) throws IOException{
         List<Car> availableCars = new ArrayList<>();
         try (Reader reader = new FileReader(CSV_CARFILE)) {
             try (CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT.withHeader())) {
                 for (CSVRecord record : csvParser) {
-                    String brand = record.get("Car Brand");
-                    String type = record.get("Car Type");
+                    String csvBrand = record.get("Car Brand");
+                    String csvType = record.get("Car Type");
                     String model = record.get("Car Model");
                     String regNumber = record.get("RegNumber");
-                    int year = Integer.parseInt(record.get("Year"));
-                    String fuelType = record.get("Fuel Type");
-                    String transmission = record.get("Transmission");
-                    int mileage = Integer.parseInt(record.get("Mileage"));
+                    int csvYear = Integer.parseInt(record.get("Year"));
+                    String csvFuelType = record.get("Fuel Type");
+                    String csvTransmission = record.get("Transmission");
+                    int csvMileage = Integer.parseInt(record.get("Mileage"));
 
-                    Car car = new Car(brand, type, model, regNumber, year, fuelType, transmission, mileage);
-                    availableCars.add(car);
+                    //Apply Filters
+                    if(csvBrand.equalsIgnoreCase(brand) &&
+                            csvType.equalsIgnoreCase(type) &&
+                            csvYear >= minYear && csvYear <= maxYear &&
+                            csvFuelType.equalsIgnoreCase(fuelType) &&
+                            csvTransmission.equalsIgnoreCase(transmission) &&
+                            csvMileage >= minMileage && csvMileage <= maxMileage
+                    ){
+                        availableCars.add(new Car(csvBrand,csvType,model,regNumber,csvYear,csvFuelType,csvTransmission,csvMileage));
+                    }
                 }
             }
         }
         return availableCars;
 
 
-            }
-        }
+    }
+}
