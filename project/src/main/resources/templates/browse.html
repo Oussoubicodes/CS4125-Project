@@ -1,59 +1,42 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:c="http://java.sun.com/jsp/jstl/core">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Search</title>
+    <title>Available Cars</title>
 </head>
 <body>
-<h1>Car Search</h1>
+<h1>Available Cars</h1>
 
-<form id="search-form">
-    <label for="brands">Car Brands:</label>
-    <select id="brands" name="brands" multiple>
-        <option value="Toyota">Toyota</option>
-        <option value="Honda">Honda</option>
-        <option value="Ford">Ford</option>
-        <option value="Opel">Opel</option>
-        <option value="Volkswagen">Volkswagen</option>
-        <option value="Toyata">Toyata</option>
-        <option value="Skoda">Skoda</option>
-        <option value="Renault">Renault</option>
-        <option value="Hyundai">Hyundai</option>
-        <!-- Add more car brands as needed -->
-    </select><br><br>
-
-    <label for="type">Car Type:</label>
-    <select id="type" name="type">
-        <option value="Sedan">Sedan</option>
-        <option value="SUV">SUV</option>
-        <option value="Hatchback">Hatchback</option>
-        <!-- Add more car types as needed -->
-    </select><br><br>
-
-    <label id= "transmission">Transmission:</label>
-    <input type="radio" id="automatic" name="transmission" value="Automatic">
-    <label for="Automatic">Automatic</label>
-    <input type="radio" id="manual" name="transmission" value="Manual">
-    <label for="Manual">Manual</label><br><br>
-
-    <label id="fuel" >Fuel Type:</label>
-    <input type="checkbox" id="petrol" name="fuel" value="petrol">
-    <label for="petrol">Petrol</label>
-    <input type="checkbox" id="diesel" name="fuel" value="diesel">
-    <label for="diesel">Diesel</label><br><br>
-
-    <label for="minYear">Min Year:</label>
-    <input type="number" id="minYear" name="minYear" min="1900"><br>
-
-    <label for="maxYear">Max Year:</label>
-    <input type="number" id="maxYear" name="maxYear" min="1900"><br><br>
-
-    <label for="minMileage">Min Mileage:</label>
-    <input type="number" id="minMileage" name="minMileage" min="0"><br>
-
-    <label for="maxMileage">Max Mileage:</label>
-    <input type="number" id="maxMileage" name="maxMileage" min="0"><br><br>
-
-    <button type="submit">Search</button>
-</form>
+<table>
+    <thead>
+    <tr>
+        <th>Brand</th>
+        <th>Type</th>
+        <th>Model</th>
+        <th>Registration Number</th>
+        <th>Year</th>
+        <th>Fuel Type</th>
+        <th>Transmission</th>
+        <th>Mileage</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Loop through the list of available cars and populate the table rows -->
+    <c:forEach items="${availableCars}" var="car">
+        <tr>
+            <td>${car.brand}</td>
+            <td>${car.type}</td>
+            <td>${car.model}</td>
+            <td>${car.regNumber}</td>
+            <td>${car.year}</td>
+            <td>${car.fuelType}</td>
+            <td>${car.transmission}</td>
+            <td>${car.mileage}</td>
+        </tr>
+    </c:forEach>
+    </tbody>
+</table>
+</body>
+</html>

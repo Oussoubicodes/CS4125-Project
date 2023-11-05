@@ -46,6 +46,10 @@ public class Car{
         this.brand = brand;
     }
 
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public void setYear(int year){
         this.year = year;
     }
@@ -85,6 +89,10 @@ public class Car{
 
     public String getModel(){
         return this.model;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public String getFuelType(){
