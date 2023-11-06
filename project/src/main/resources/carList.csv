@@ -1,10 +1,11 @@
-id, make, model, regNumber, year, fuelType, transmission, mileage
-1, Opel, Insignia, 12DS1095, 2012, Diesel, Manual, 34097
-2, Ford, Focus, 152LK2365, 2015, Petrol, Manual, 21359
-3, Volkswagen, Golf, 141TS2947, 2014, Petrol, Automatic, 21576
-4, Toyota, Corola, 192PK1285, 2019, Diesel, Manual, 5673
-5, Skoda, Octavia, 09L1872, 2009, Diesel, Manual, 197235
-6, Renault, Clio, 222G9308, 2022, Hybrid, Automatic, 1357
-7, Seat, Ibiza, 141L2398, 2014, Petrol, Manual, 27834
-8, Opel, Corsa, 151D2746, 2015, Petrol, Manual, 25128
-9, Hyundai, Genesis, 231D8376, 2023, Electric, Automatic, 578
+id, make, model, type, regNumber, year, fuelType, transmission, mileage, pricePerDay
+1, Opel, Insignia, saloon, 12DS1095, 2012, Diesel, Manual, 34097, 12.55
+2, Ford, Focus, hatchback, 152LK2365, 2015, Petrol, Manual, 21359, 12.05
+3, Volkswagen, Golf, hatchback, 141TS2947, 2014, Petrol, Automatic, 21576, 12.00
+4, Toyota, Corola, saloon, 192PK1285, 2019, Diesel, Manual, 5673, 13.50
+5, Skoda, Octavia, saloon, 09L1872, 2009, Diesel, Manual, 197235, 7.00
+6, Renault, Clio, hatchback, 222G9308, 2022, Hybrid, Automatic, 1357, 14.00
+7, Seat, Ibiza, hatchback, 141L2398, 2014, Petrol, Manual, 27834, 11.55
+8, Opel, Corsa, hatchback, 151D2746, 2015, Petrol, Manual, 25128, 11.55
+9, Hyundai, Genesis, SUV, 231D8376, 2023, Electric, Automatic, 578, 20.00
+10, Ford, Fiesta, hatchback, 201L3985, 2020, Petrol, Manual, 1298, 12.05
