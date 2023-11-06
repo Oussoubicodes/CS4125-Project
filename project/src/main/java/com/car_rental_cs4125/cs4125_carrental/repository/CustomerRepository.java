@@ -11,6 +11,8 @@ public interface CustomerRepository {
     List<Customer> findAll();
     Customer findByUsername(String username);
     boolean authenticate(String userrname, String password);
+    void addCustomerToCSV(Customer customer);
+    boolean isCustomerValid(Customer customer);
     
         
     }

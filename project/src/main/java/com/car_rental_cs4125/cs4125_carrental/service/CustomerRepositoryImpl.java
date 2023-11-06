@@ -7,19 +7,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 import com.car_rental_cs4125.cs4125_carrental.model.Customer;
 import com.car_rental_cs4125.cs4125_carrental.repository.CustomerRepository;
 
-@Service
-public class CustomerService implements CustomerRepository {
+@Repository
+public class CustomerRepositoryImpl implements CustomerRepository {
 
     private static final String FILE_PATH = "project\\src\\main\\resources\\users.csv";
 
     private List<Customer> customers = new ArrayList<>();
 
-    public CustomerService() {
+    public CustomerRepositoryImpl() {
         this.customers = loadUsersFromCSV(FILE_PATH);
     }
 
