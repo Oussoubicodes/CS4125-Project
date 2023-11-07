@@ -1,10 +1,42 @@
+
 <!DOCTYPE html>
+<html lang="en" xmlns:c="http://java.sun.com/jsp/jstl/core">
 <head>
-    <title>Browse Cars</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Cars</title>
 </head>
-
 <body>
-    <h1>Browse Cars</h1>
-</body>
+<h1>Available Cars</h1>
 
+<table>
+    <thead>
+    <tr>
+        <th>Brand</th>
+        <th>Type</th>
+        <th>Model</th>
+        <th>Registration Number</th>
+        <th>Year</th>
+        <th>Fuel Type</th>
+        <th>Transmission</th>
+        <th>Mileage</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Loop through the list of available cars and populate the table rows -->
+    <c:forEach items="${availableCars}" var="car">
+        <tr>
+            <td>${car.brand}</td>
+            <td>${car.type}</td>
+            <td>${car.model}</td>
+            <td>${car.regNumber}</td>
+            <td>${car.year}</td>
+            <td>${car.fuelType}</td>
+            <td>${car.transmission}</td>
+            <td>${car.mileage}</td>
+        </tr>
+    </c:forEach>
+    </tbody>
+</table>
+</body>
 </html>
