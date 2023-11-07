@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.car_rental_cs4125.cs4125_carrental.service.CustomerRepositoryImpl;
+import com.car_rental_cs4125.cs4125_carrental.repository.CustomerRepositoryImpl;
 
 @Controller
 public class LoginController {

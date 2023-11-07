@@ -11,7 +11,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.car_rental_cs4125.cs4125_carrental.model.Customer;
-import com.car_rental_cs4125.cs4125_carrental.service.CustomerRepositoryImpl;
 
 class CustomerRepositoryImplTest {
 

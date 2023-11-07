@@ -1,4 +1,4 @@
-package com.car_rental_cs4125.cs4125_carrental.service;
+package com.car_rental_cs4125.cs4125_carrental.repository;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -10,7 +10,6 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.car_rental_cs4125.cs4125_carrental.model.Customer;
-import com.car_rental_cs4125.cs4125_carrental.repository.CustomerRepository;
 
 @Repository
 public class CustomerRepositoryImpl implements CustomerRepository {

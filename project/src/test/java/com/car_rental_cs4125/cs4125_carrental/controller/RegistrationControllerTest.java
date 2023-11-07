@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.car_rental_cs4125.cs4125_carrental.model.Customer;
-import com.car_rental_cs4125.cs4125_carrental.service.CustomerRepositoryImpl;
+import com.car_rental_cs4125.cs4125_carrental.repository.CustomerRepositoryImpl;
 
 class RegistrationControllerTest {
     private CustomerRepositoryImpl customerRepositoryImpl;

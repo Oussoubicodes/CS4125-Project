@@ -59,22 +59,6 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
-		<dependency>
-        	<groupId>org.apache.commons</groupId>
-        	<artifactId>commons-csv</artifactId>
-        	<version>1.9.0</version> <!-- Use the latest version available -->
-    	</dependency>
-		<dependency>
-			<groupId>com.opencsv</groupId>
-			<artifactId>opencsv</artifactId>
-			<version>5.5.1</version> <!-- Use the latest version available -->
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
-		</dependency>
 	</dependencies>
 
 	<build>
