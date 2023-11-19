@@ -56,9 +56,8 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
     public Customer findByUsername(String username) {
         if (username != null) {
-            // Query your data store or list to find the user by username
-            // Example: Assuming user list is 'users' and 'getUsername()' method returns the
-            // username
+            /**  Query csv to find the user by username **/
+            
             for (Customer customer : customers) {
                 if (username.equals(customer.getUsername())) { // Ensure 'username' is not null before comparison
                     return customer;
@@ -105,10 +104,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         if (!customer.getUsername().matches("^[a-zA-Z0-9._-]{3,}$")) {
             return false;
         }
-        if (!customer.getPassword().matches(".*\\d.*")) {
-            return false;
-        }
-        return true;
+        return customer.getPassword().matches(".*\\d.*");
     }
 
 }
