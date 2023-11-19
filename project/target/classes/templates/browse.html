@@ -1,17 +1,49 @@
-
 <!DOCTYPE html>
-<html lang="en" xmlns:c="http://java.sun.com/jsp/jstl/core">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Available Cars</title>
+    <style>
+        /* Add your styles here if needed */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .reserve-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body>
+
 <h1>Available Cars</h1>
 
 <table>
     <thead>
     <tr>
+        <th>ID</th>
         <th>Brand</th>
         <th>Type</th>
         <th>Model</th>
@@ -20,23 +52,31 @@
         <th>Fuel Type</th>
         <th>Transmission</th>
         <th>Mileage</th>
+        <th>Price Per Day</th>
+        <th>Action</th>
     </tr>
     </thead>
-    <tbody>
-    <!-- Loop through the list of available cars and populate the table rows -->
-    <c:forEach items="${availableCars}" var="car">
-        <tr>
-            <td>${car.brand}</td>
-            <td>${car.type}</td>
-            <td>${car.model}</td>
-            <td>${car.regNumber}</td>
-            <td>${car.year}</td>
-            <td>${car.fuelType}</td>
-            <td>${car.transmission}</td>
-            <td>${car.mileage}</td>
-        </tr>
-    </c:forEach>
-    </tbody>
+    <!-- Use Thymeleaf's th:each to iterate through the list of cars -->
+    <tr th:each="car : ${cars}">
+        <td th:text="${car.id}"></td>
+        <td th:text="${car.make}"></td>
+        <td th:text="${car.type}"></td>
+        <td th:text="${car.model}"></td>
+        <td th:text="${car.regNumber}"></td>
+        <td th:text="${car.year}"></td>
+        <td th:text="${car.fuelType}"></td>
+        <td th:text="${car.transmission}"></td>
+        <td th:text="${car.mileage}"></td>
+        <td th:text="${car.pricePerDay}"></td>
+        <td>
+            <!-- Form for Reserve button -->
+            <form th:action="@{/reservation}" method="post">
+                <input type="hidden" name="carId" th:value="${car.id}" />
+                <button class="reserve-button" type="submit">Reserve</button>
+            </form>
+        </td>
+    </tr>
 </table>
+
 </body>
 </html>

@@ -3,108 +3,88 @@ package com.car_rental_cs4125.cs4125_carrental.model;
 import jakarta.persistence.*;
 
 @Entity
-public class Car{
+public class Car {
     @Id
-    @GeneratedValue( strategy = GenerationType.AUTO)
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "carId")
     private int id;
-    private String regNumber;
-    private String brand;
-    private String type;
-    @Column( name= "year")
-    private int year;
+
+    private String make;
     private String model;
+    private String type;
+    private String regNumber;
+    private int year;
     private String fuelType;
     private String transmission;
     private int mileage;
+    private double pricePerDay;
 
-    public Car(int id, String brand, String type, String model, String regNumber, int year, String fuelType, String transmission, int mileage) {
-        this.brand = brand;
-        this.type = type;
-        this.model = model;
-        this.regNumber = regNumber;
-        this.year = year;
-        this.fuelType= fuelType;
-        this.transmission = transmission;
-        this.mileage = mileage;
-    }
-
-    public Car(){
-
-    }
-
-    //Set methods
-    public void setId(int id){
+    // Constructor
+    public Car(int id, String make, String model, String type, String regNumber,
+               int year, String fuelType, String transmission, int mileage, double pricePerDay) {
         this.id = id;
-    }
-
-    public void setRegNum(String regNumber){
-        this.regNumber = regNumber;
-    }
-
-    public void setBrand(String brand){
-        this.brand = brand;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public void setYear(int year){
-        this.year = year;
-    }
-
-    public void setModel(String model){
+        this.make = make;
         this.model = model;
-    }
-
-    public void setFuelType(String fuelType){
+        this.type = type;
+        this.regNumber = regNumber;
+        this.year = year;
         this.fuelType = fuelType;
-    }
-
-    public void setTransmission(String transmission){
         this.transmission = transmission;
-    }
-
-    public void setMileage(int mileage){
         this.mileage = mileage;
+        this.pricePerDay = pricePerDay;
     }
 
-    //Get methods
-    public int getById(){
-        return this.id;
+    public Car() {
+
     }
 
-    public String getRegNum(){
-        return this.regNumber;
+    // Getter methods
+    public int getId() {
+        return id;
     }
 
-    public int getYear(){
-        return this.year;
+    public String getMake() {
+        return make;
     }
 
-    public String getBrand(){
-        return this.brand;
-    }
-
-    public String getModel(){
-        return this.model;
+    public String getModel() {
+        return model;
     }
 
     public String getType() {
         return type;
     }
 
-    public String getFuelType(){
-        return this.fuelType;
+    public String getRegNumber() {
+        return regNumber;
     }
 
-    public String getTransmission(){
-        return this.transmission;
+    public int getYear() {
+        return year;
     }
 
-    public int getMileage(){
-        return this.mileage;
+    public String getFuelType() {
+        return fuelType;
     }
 
+    public String getTransmission() {
+        return transmission;
+    }
+
+    public int getMileage() {
+        return mileage;
+    }
+
+    public double getPricePerDay() {
+        return pricePerDay;
+    }
+
+    // toString method for easy printing
+    @Override
+    public String toString() {
+        return String.format(
+                "Car{id=%d, make='%s', model='%s', type='%s', regNumber='%s', year=%d, fuelType='%s', " +
+                        "transmission='%s', mileage=%d, pricePerDay=%.2f}",
+                id, make, model, type, regNumber, year, fuelType, transmission, mileage, pricePerDay);
+    }
 }
