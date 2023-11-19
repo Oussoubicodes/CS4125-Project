@@ -13,8 +13,11 @@ public interface CustomerRepository {
     boolean authenticate(String userrname, String password);
     void addCustomerToCSV(Customer customer);
     boolean isCustomerValid(Customer customer);
-    
-        
+
+    void addObserver(CustomerRepositoryObserver observer);
+    void removeObserver(CustomerRepositoryObserver observer);
+
+    Customer createCustomer(String username, String password); 
     }
 
 

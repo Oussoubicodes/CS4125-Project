@@ -17,6 +17,8 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     private static final String FILE_PATH = "project\\src\\main\\resources\\users.csv";
 
     private List<Customer> customers = new ArrayList<>();
+    private List<CustomerRepositoryObserver> observers = new ArrayList<>();
+
 
     public CustomerRepositoryImpl() {
         this.customers = loadUsersFromCSV(FILE_PATH);
@@ -67,6 +69,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         return null;
     }
 
+    @Override
     public boolean authenticate(String username, String password) {
         // Load user data from the CSV file or stored list
         List<Customer> customerList = loadUsersFromCSV(FILE_PATH);
@@ -80,6 +83,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     }
 
     // add a new customer to the CSV file
+    @Override
     public void addCustomerToCSV(Customer customer) {
         if (isCustomerValid(customer)) {
             try (FileWriter writer = new FileWriter(FILE_PATH, true)) {
@@ -94,6 +98,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         }
     }
 
+    @Override
     public boolean isCustomerValid(Customer customer) {
         if (customer.getUsername() == null || customer.getUsername().isEmpty()) {
             return false; // username shouldn't be null or empty
@@ -105,6 +110,35 @@ public class CustomerRepositoryImpl implements CustomerRepository {
             return false;
         }
         return customer.getPassword().matches(".*\\d.*");
+    }
+
+    @Override
+    public void addObserver(CustomerRepositoryObserver observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(CustomerRepositoryObserver observer) {
+        observers.remove(observer);
+    }
+
+    //create customer using factory method
+    @Override
+    public Customer createCustomer(String username, String password) {
+        
+        Customer customer = new Customer(username, password);
+
+        //add the new customer to CSV
+        addCustomerToCSV(customer);
+        notifyObservers(customer);
+
+        return customer;
+
+    }
+    private void notifyObservers(Customer customer){
+        for (CustomerRepositoryObserver observer: observers) {
+            observer.onCustomerAdded(customer);
+        } 
     }
 
 }

@@ -35,7 +35,7 @@ public class RegisterController {
             modelAndView.addObject("customer", customer);
             modelAndView.addObject("error", "Invalid customer details. Please check your inputs");
         } else {
-            customerRepoImpl.addCustomerToCSV(customer);
+            customerRepoImpl.createCustomer(customer.getUsername(), customer.getPassword());
             modelAndView.setViewName("redirect:/login"); // Redirect to the login page after successful registration
         }
     
