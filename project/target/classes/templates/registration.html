@@ -1,4 +1,3 @@
-<!-- register.html -->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -6,17 +5,18 @@
 </head>
 <body>
     <h1>Customer Registration</h1>
+
     <form action="/register" method="post">
         <label>Username:</label>
-        <input type="text" name="username" th:value="${username}" required><br><br>
-        
+        <input type="text" name="username" required><br><br>
+
         <label>Password:</label>
-        <input type="password" name="password" th:value="${password}" required><br><br>
-        
+        <input type="password" name="password" required><br><br>
+
         <button type="submit">Register</button>
     </form>
 
-    <!-- Show error message if registration failed -->
     <p th:if="${error}" style="color: red" th:text="${error}"></p>
 </body>
 </html>
+

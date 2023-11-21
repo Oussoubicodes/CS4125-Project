@@ -2,6 +2,7 @@ package com.car_rental_cs4125.cs4125_carrental.repository;
 
 import org.springframework.stereotype.Repository;
 
+import com.car_rental_cs4125.cs4125_carrental.errors.CustomerAlreadyExistsException;
 import com.car_rental_cs4125.cs4125_carrental.model.Customer;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public interface CustomerRepository {
     void addObserver(CustomerRepositoryObserver observer);
     void removeObserver(CustomerRepositoryObserver observer);
 
-    Customer createCustomer(String username, String password); 
+    Customer createCustomer(String username, String password) throws CustomerAlreadyExistsException; 
     }
 
 

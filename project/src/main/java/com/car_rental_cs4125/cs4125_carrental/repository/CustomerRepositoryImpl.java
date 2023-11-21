@@ -125,16 +125,42 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     //create customer using factory method
     @Override
     public Customer createCustomer(String username, String password) {
-        
-        Customer customer = new Customer(username, password);
-
-        //add the new customer to CSV
-        addCustomerToCSV(customer);
+    
+        // Create a new Customer object
+        Customer customer = new Customer();
+        customer.setUsername(username);
+        customer.setPassword(password);
         notifyObservers(customer);
-
+    
+        // Add the customer to the CSV file
+        addCustomerToCSV(customer);
+    
         return customer;
-
     }
+
+public boolean isCustomerValid(String username) {
+    // Read the CSV file and check if the username exists
+    try {
+        BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            String[] customerData = line.split(",");
+            String existingUsername = customerData[0];
+            if (existingUsername.equals(username)) {
+                reader.close();
+                return false;
+            }
+        }
+        reader.close();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+
+    // Return true if the username doesn't exist, false otherwise
+    return true;
+}
+
+
     private void notifyObservers(Customer customer){
         for (CustomerRepositoryObserver observer: observers) {
             observer.onCustomerAdded(customer);
