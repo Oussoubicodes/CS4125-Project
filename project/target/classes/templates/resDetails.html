@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h2 {
+            color: #4CAF50;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .confirm-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Reservation Details</h2>
+
+<form action="/reservations/confirmReservation" method="post" th:object="${reservation}" name="reservationForm">
+<table>
+    <tr>
+        <th>Car ID</th>
+        <td th:text="${selectedCar.id}"></td>
+    </tr>
+    <tr>
+        <th>Car Make</th>
+        <td th:text="${selectedCar.make}"></td>
+    </tr>
+    <tr>
+        <th>Car Model</th>
+        <td th:text="${selectedCar.model}"></td>
+    </tr>
+    <tr>
+        <th>Start Date</th>
+        <td th:text="${reservation.startDate}"></td>
+    </tr>
+    <tr>
+        <th>End Date</th>
+        <td th:text="${reservation.endDate}"></td>
+    </tr>
+    <tr>
+        <th>Customer Name</th>
+        <td th:text="${reservation?.customerName}"></td>
+    </tr>
+    <tr>
+        <th>Customer Email</th>
+        <td th:text="${reservation?.customerEmail}"></td>
+    </tr>
+    <tr>
+        <th>Total Cost</th>
+        <td th:text="${reservation.totalCost}"></td>
+    </tr>
+</table>
+
+    <button class="confirm-button" type="submit">Confirm Reservation</button>
+</form>
+
+</body>
+</html>

@@ -1,40 +1,51 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Car Reservation</title>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Reservation</title>
-    <style>
+<style>
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
         }
+
         form {
             max-width: 400px;
             margin: auto;
         }
+
         label {
             display: block;
             margin-bottom: 8px;
         }
+
         input, button {
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
             box-sizing: border-box;
         }
+
         input[readonly] {
             background-color: #f4f4f4;
             cursor: not-allowed;
         }
+
         button {
             background-color: #4CAF50;
             color: white;
             border: none;
             cursor: pointer;
         }
+
         button:hover {
             background-color: #45a049;
+        }
+
+        .error-message {
+            color: #ff0000;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -42,7 +53,12 @@
 
 <h2>Car Reservation</h2>
 
-<form action="/reserve" method="post">
+<form action="/reservations" method="post" th:object="${reservation}">
+    <!-- Other form fields -->
+
+    <!-- Hidden field for carId -->
+    <input type="hidden" name="carId" th:value="${selectedCar.id}" />
+
     <!-- Car information -->
     <label for="carName">Car Name:</label>
     <input type="text" id="carName" name="carName" th:value="${selectedCar.make}" readonly>
@@ -66,6 +82,14 @@
 
     <label for="endDate">End Date:</label>
     <input type="date" id="endDate" name="endDate" required>
+
+    <!-- Display availability error -->
+    <div th:if="${availabilityError}" class="error-message">
+        <p th:text="${availabilityError}"></p>
+    </div>
+
+    <!-- Hidden field for carId -->
+    <input type="hidden" name="carId" th:value="${selectedCar.id}" />
 
     <button type="submit">Reserve Now</button>
 </form>

@@ -43,7 +43,10 @@ public class ReservationRepositoryImpl implements ReservationRepository {
         return numberOfDays * pricePerDay;
     }
 
-    public boolean checkAvailability(List<Reservation> reservations,int carId, String startDate, String endDate) throws IOException {
+    public boolean checkAvailability(int carId, String startDate, String endDate) throws IOException {
+        // Retrieve the vehicle based on its ID
+        List<Reservation> reservations = getAllReservations();
+
         // Check if the car is available for the given period
         for (Reservation existingRes : reservations) {
             if (existingRes.getCarId() == carId) {

@@ -35,14 +35,5 @@ public class CarController {
         return "browse.html"; // The name of your view (e.g., browse-vehicles.html)
     }
 
-
-  @PostMapping("/reservation")
-    public String reserveCar(@RequestParam int carId, Model model) throws IOException {
-     Car selectedCar = carService.findByCarID(carId);
-     model.addAttribute("selectedCar",selectedCar);
-
-
-      return "reservation";
-  }
     // Add more controller methods as needed
 }

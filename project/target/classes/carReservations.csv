@@ -1,6 +1,6 @@
 reservationId,carId,startDate,endDate,customerName,customerEmail,totalCost
-1,2,2023-01-15,2023-01-20,John Doe,john@example.com,72.30
-2,5,2023-02-01,2023-02-07,Jane Smith,jane@example.com,72.30
-3,8,2023-03-10,2023-03-15,Bob Johnson,bob@example.com,69.30
-4,1,2023-04-05,2023-04-12,Alice Brown,alice@example.com,94.50
-5,6,2023-05-20,2023-05-25,Charlie White,charlie@example.com,70.00
+1,2,15/01/2023,20/01/2023,John Doe,john@example.com,72.30
+2,5,01/02/2023,07/02/2023,Jane Smith,jane@example.com,72.30
+3,8,10/03/2023,15/03/2023,Bob Johnson,bob@example.com,69.30
+4,1,05/04/2023,12/04/2023,Alice Brown,alice@example.com,94.50
+5,6,20/05/2023,25/05/2023,Charlie White,charlie@example.com,70.00
