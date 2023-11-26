@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View Car</title>
+</head>
+<body>
+
+<h2>View Cars</h2>
+
+<p>ID: <span th:text="${car.id}"></span></p>
+<p>Make: <span th:text="${car.make}"></span></p>
+<p>Model: <span th:text="${car.model}"></span></p>
+<p>Type: <span th:text="${car.type}"></span></p>
+<p>Reg. Number: <span th:text="${car.regNumber}"></span></p>
+<p>Year: <span th:text="${car.year}"></span></p>
+<p>Fuel Type: <span th:text="${car.fuelType}"></span></p>
+<p>Transmission: <span th:text="${car.transmission}"></span></p>
+<p>Mileage: <span th:text="${car.mileage}"></span></p>
+<p>Price Per Day: <span th:text="${car.pricePerDay}"></span></p>
+
+<!-- Link to Remove Car -->
+<a th:href="@{'/manageCars/removeCar?id=' + ${car.id}}">Remove Car</a>
+
+</body>
+</html>

@@ -1,6 +1,17 @@
 package com.car_rental_cs4125.cs4125_carrental.repository;
 
-public interface CarRepository
-{
+import java.io.IOException;
+import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
+import com.car_rental_cs4125.cs4125_carrental.model.Car;
+
+@Repository
+public interface CarRepository {
+    List<Car> getAllCars() throws IOException;
+    Car findByCarID(int carId) throws IOException;
+    void addCar(Car car) throws IOException;
+    void removeCar(int id) throws IOException;
+    void updateCar(Car updatedCar) throws IOException;
 }

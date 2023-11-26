@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Cars</title>
+</head>
+<body>
+
+<h2>All Cars</h2>
+
+<table>
+    <caption></caption>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Type</th>
+        <th>Reg. Number</th>
+        <th>Year</th>
+        <th>Fuel Type</th>
+        <th>Transmission</th>
+        <th>Mileage</th>
+        <th>Price Per Day</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="car : ${cars}">
+        <td th:text="${car.id}"></td>
+        <td th:text="${car.make}"></td>
+        <td th:text="${car.model}"></td>
+        <td th:text="${car.type}"></td>
+        <td th:text="${car.regNumber}"></td>
+        <td th:text="${car.year}"></td>
+        <td th:text="${car.fuelType}"></td>
+        <td th:text="${car.transmission}"></td>
+        <td th:text="${car.mileage}"></td>
+        <td th:text="${car.pricePerDay}"></td>
+        <td>
+            <a th:href="@{'/manageCars/viewCar?id=' + ${car.id}}">View</a>
+            <a th:href="@{'/manageCars/updateCar?id=' + ${car.id}}">Update</a>
+            <a th:href="@{'/manageCars/removeCar?id=' + ${car.id}}">Remove</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Add/Update/Remove Car</h2>
+
+<form th:action="@{/manageCars}" method="post">
+    <input type="hidden" name="id" th:value="${car.id}" />
+    
+    <label>Make:</label>
+    <input type="text" name="make" th:value="${car.make}" required />
+    
+    <label>Model:</label>
+    <input type="text" name="model" th:value="${car.model}" required />
+    
+    <label>Type:</label>
+    <input type="text" name="type" th:value="${car.type}" required />
+    
+    <label>Reg. Number:</label>
+    <input type="text" name="regNumber" th:value="${car.regNumber}" required />
+    
+    <label>Year:</label>
+    <input type="text" name="year" th:value="${car.year}" required />
+    
+    <label>Fuel Type:</label>
+    <input type="text" name="fuelType" th:value="${car.fuelType}" required />
+    
+    <label>Transmission:</label>
+    <input type="text" name="transmission" th:value="${car.transmission}" required />
+    
+    <label>Mileage:</label>
+    <input type="text" name="mileage" th:value="${car.mileage}" required />
+    
+    <label>Price Per Day:</label>
+    <input type="text" name="pricePerDay" th:value="${car.pricePerDay}" required />
+    
+    <button type="submit" name="action" value="add">Add Car</button>
+    <button type="submit" name="action" value="update">Update Car</button>
+    <button type="submit" name="action" value="remove">Remove Car</button>
+</form>
+
+</body>
+</html>

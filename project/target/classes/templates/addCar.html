@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Car</title>
+</head>
+<body>
+
+<h2>Add Car</h2>
+
+<form th:action="@{/manageCars}" method="post">
+    <input type="hidden" name="id" th:value="${car.id}" />
+    
+    <label>Make:</label>
+    <input type="text" name="make" th:value="${car.make}" required />
+    
+    <label>Model:</label>
+    <input type="text" name="model" th:value="${car.model}" required />
+    
+    <label>Type:</label>
+    <input type="text" name="type" th:value="${car.type}" required />
+    
+    <label>Reg. Number:</label>
+    <input type="text" name="regNumber" th:value="${car.regNumber}" required />
+    
+    <label>Year:</label>
+    <input type="text" name="year" th:value="${car.year}" required />
+    
+    <label>Fuel Type:</label>
+    <input type="text" name="fuelType" th:value="${car.fuelType}" required />
+    
+    <label>Transmission:</label>
+    <input type="text" name="transmission" th:value="${car.transmission}" required />
+    
+    <label>Mileage:</label>
+    <input type="text" name="mileage" th:value="${car.mileage}" required />
+    
+    <label>Price Per Day:</label>
+    <input type="text" name="pricePerDay" th:value="${car.pricePerDay}" required />
+    
+    <button type="submit" name="action" value="add">Add Car</button>
+</form>
+
+</body>
+</html>
