@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reservation Confirmation</title>
+    <title>Reservation Confirmed</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -18,6 +18,15 @@
 
 <h2>Reservation Confirmed</h2>
 <p>Your reservation has been confirmed. Thank you!</p>
+
+<!-- Display User Email -->
+<p>User Email: <span th:text="${reservation.customerEmail}"></span></p>
+
+<!-- Display Reservation ID -->
+<p>Reservation ID: <span th:text="${reservation.reservationId}"></span></p>
+
+<!-- Link to Return to Home Page -->
+<a th:href="@{/home}">Return To Home Page</a>
 
 </body>
 </html>

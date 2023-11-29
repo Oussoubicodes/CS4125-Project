@@ -28,6 +28,23 @@ public class CarController {
         this.carService = carRepositoryImpl;
     }
 
+    @GetMapping("/search")
+    public String searchCars(@RequestParam(name = "make", required = false) String make,
+                             @RequestParam(name = "type", required = false) String type,
+                             Model model) {
+        // Get the list of cars based on the search criteria
+        List<Car> cars = carService.searchCars(make, type);
+
+        // Add the search criteria and results to the model
+        model.addAttribute("make", make);
+        model.addAttribute("type", type);
+        model.addAttribute("cars", cars);
+
+        // Return the view for displaying search results
+        return "browse";
+    }
+
+
     @GetMapping("/browse")
     public String browseVehicles(Model model) throws IOException {
         List<Car> cars = carService.getAllCars();

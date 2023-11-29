@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.List;
 
 @Controller
 public class ReservationController {
@@ -35,24 +37,41 @@ public class ReservationController {
 
     @PostMapping("/reservations")
     public String reserveCar(@ModelAttribute("reservation") Reservation reservation,
-                             @RequestParam("startDate") String startDate,
-                             @RequestParam("endDate") String endDate,
+                             @RequestParam("startDate") LocalDate startDate,
+                             @RequestParam("endDate") LocalDate endDate,
+                             @RequestParam("customerName") String customerName,
+                             @RequestParam("customerEmail") String customerEmail,
                              RedirectAttributes redirectAttributes) throws IOException {
+
         // Check availability using startDate and endDate
         boolean isAvailable = reservationRepositoryImpl.checkAvailability(reservation.getCarId(), startDate, endDate);
 
         if (isAvailable) {
-            reservation.setStartDate(startDate);
-            reservation.setEndDate(endDate);
+            // Create a new reservation using the repository method
+            Reservation newReservation = reservationRepositoryImpl.createReservation(
+                    reservation.getCarId(), startDate, endDate, customerName, customerEmail, 0.0);
 
+            // Set the attributes for the reservation object
+            newReservation.setStartDate(startDate);
+            newReservation.setEndDate(endDate);
+            newReservation.setCustomerName(customerName);
+            newReservation.setCustomerEmail(customerEmail);
+
+            // Retrieve the selected car
             Car selectedCar = carRepositoryImpl.findByCarID(reservation.getCarId());
+
+            // Calculate total cost
             double pricePerDay = selectedCar.getPricePerDay();
-
             double totalCost = reservationRepositoryImpl.calculateTotalCost(startDate, endDate, pricePerDay);
-            reservation.setTotalCost(totalCost);
+            newReservation.setTotalCost(totalCost);
 
-            redirectAttributes.addFlashAttribute("reservation", reservation);
+            // Add the new reservation
+            reservationRepositoryImpl.addReservation(newReservation);
+
+            // Set attributes for the view
+            redirectAttributes.addFlashAttribute("reservation", newReservation);
             redirectAttributes.addFlashAttribute("selectedCar", selectedCar);
+
             return "redirect:/resDetails";  // Redirect to reservation details page
         } else {
             // Set availability error message
@@ -61,9 +80,10 @@ public class ReservationController {
         }
     }
 
+
     @GetMapping("/resDetails")
     public String showReservationDetails(@ModelAttribute("reservation") Reservation reservation,
-                                         @ModelAttribute("selectedCar") Car selectedCar,Model model) {
+                                         @ModelAttribute("selectedCar") Car selectedCar, Model model) {
 
 
         // Add reservation and selected car details to the model for rendering in the view
@@ -72,7 +92,55 @@ public class ReservationController {
 
         return "resDetails";  // Return the Thymeleaf template for reservation details
     }
+
+    @PostMapping("/resDetails")
+    public String confirmReservation(@ModelAttribute("reservation") Reservation reservation, RedirectAttributes redirectAttributes) throws IOException {
+
+        redirectAttributes.addFlashAttribute("successMessage", "Reservation confirmed successfully!");
+        redirectAttributes.addFlashAttribute("reservation", reservation);
+
+        return "redirect:/confirmReservation";
+    }
+
+    @GetMapping("/confirmReservation")
+    public String showConfirmationPage(@ModelAttribute("reservation")Reservation reservation,Model model) {
+
+        model.addAttribute("reservation", reservation);
+
+        return "confirmReservation";  // Assuming "confirmReservation" is the name of your Thymeleaf template for the confirmation page
+    }
+
+    @GetMapping("/cancelReservation")
+    public String showCancelReservationForm(Model model) {
+        model.addAttribute("reservation", new Reservation()); // Use the Reservation class
+        return "cancelReservation"; // Assuming you have a Thymeleaf template named cancelReservation.html
+    }
+
+
+    @GetMapping("/searchReservations")
+    public String searchReservations(@RequestParam(name = "reservationId", required = false) int reservationId,
+                                     @RequestParam(name = "customerName", required = false) String customerName,
+                                     Model model) throws IOException {
+        // Get the list of reservations based on the search criteria
+        List<Reservation> reservations = reservationRepositoryImpl.searchReservation(reservationId,customerName);
+
+        // Add the search criteria and results to the model
+        model.addAttribute("reservationId", reservationId);
+        model.addAttribute("customerName", customerName);
+        model.addAttribute("reservations", reservations);
+
+        // Return the view for displaying search results
+        return "cancelReservation";
+    }
+
+    @PostMapping("/cancelReservation")
+    public String cancelReservation(@RequestParam("id") int reservationId) throws IOException {
+        reservationRepositoryImpl.cancelReservation(reservationId);
+        return "redirect:/searchReservations"; // Redirect to the search results page
+    }
+
 }
+
 
 
 

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancel Reservation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h2 {
+            color: #4CAF50;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input {
+            padding: 8px;
+            margin-bottom: 16px;
+        }
+        button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .reservation-result {
+            margin-top: 20px;
+        }
+        .reservation-item {
+            margin-bottom: 16px;
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+        .cancel-button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Cancel Reservation</h2>
+
+<form action="/searchReservations" method="get">
+    <label for="reservationId">Reservation ID:</label>
+    <input type="text" id="reservationId" name="reservationId" th:value="${reservationId}" required>
+
+    <label for="customerName">Customer Name:</label>
+    <input type="text" id="customerName" name="customerName" th:value="${customerName}" required>
+
+    <button type="submit">Search</button>
+</form>
+
+<!-- Display search results -->
+<div class="reservation-result" th:if="${reservations != null}">
+    <h3>Search Results</h3>
+    <div th:each="reservation : ${reservations}" class="reservation-item">
+        <p>
+            <strong>Reservation ID:</strong> <span th:text="${reservation.reservationId}"></span><br>
+            <strong>Customer Name:</strong> <span th:text="${reservation.customerName}"></span><br>
+            <strong>Start Date:</strong> <span th:text="${reservation.startDate}"></span><br>
+            <strong>End Date:</strong> <span th:text="${reservation.endDate}"></span><br>
+            <!-- Cancel Button -->
+        <form action="/cancelReservation" method="post">
+            <input type="hidden" name="id" th:value="${reservation.reservationId}">
+            <button class="cancel-button" type="submit">Cancel</button>
+        </form>
+        </p>
+    </div>
+</div>
+
+</body>
+</html>

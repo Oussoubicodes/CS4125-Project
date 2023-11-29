@@ -12,6 +12,7 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CarRepositoryImpl implements CarRepository {
@@ -90,6 +91,16 @@ public class CarRepositoryImpl implements CarRepository {
                 return;
             }
         }
+    }
+
+    public List<Car> searchCars(String make, String type) {
+        // Perform the search based on the provided criteria
+        List<Car> filteredCars = availableCars.stream()
+                .filter(car -> (make == null || car.getMake().equalsIgnoreCase(make))
+                        && (type == null || car.getType().equalsIgnoreCase(type)))
+                .collect(Collectors.toList());
+
+        return filteredCars;
     }
 
     private void writeCarsToCSV(List<Car> cars) throws IOException {

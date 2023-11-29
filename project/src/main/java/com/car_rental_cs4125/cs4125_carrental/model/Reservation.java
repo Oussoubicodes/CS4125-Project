@@ -1,6 +1,10 @@
 package com.car_rental_cs4125.cs4125_carrental.model;
 
+import com.car_rental_cs4125.cs4125_carrental.repository.DiscountStrategy;
 import jakarta.persistence.*;
+import org.springframework.cglib.core.Local;
+
+import java.time.LocalDate;
 
 @Entity
 public class Reservation {
@@ -18,9 +22,11 @@ public class Reservation {
         private String customerName;
         private String customerEmail;
         private int carId;
-        private String startDate;
-        private String endDate;
+        private LocalDate startDate;
+        private LocalDate endDate;
         private Double totalCost;
+
+        private DiscountStrategy discountStrategy;
 
     public Car getCar() {
         return car;
@@ -30,12 +36,13 @@ public class Reservation {
         this.car = car;
     }
 
+
     // Constructors, getters, and setters
 
     public Reservation() {
     }
 
-    public Reservation(int reservationId, int carId, String customerName, String customerEmail, String startDate, String endDate, double totalCost){
+    public Reservation(int reservationId, int carId,  LocalDate startDate, LocalDate endDate,String customerName, String customerEmail, double totalCost){
         this.reservationId = reservationId;
         this.customerName = customerName;
         this.customerEmail = customerEmail;
@@ -62,11 +69,11 @@ public class Reservation {
         this.customerEmail = customerEmail;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(LocalDate endDate) {
             this.endDate = endDate;
         }
 
-        public void setStartDate(String startDate) {
+        public void setStartDate(LocalDate startDate) {
             this.startDate = startDate;
         }
 
@@ -91,7 +98,7 @@ public class Reservation {
             return customerName;
         }
 
-        public String getStartDate() {
+        public LocalDate getStartDate() {
             return startDate;
         }
 
@@ -99,7 +106,7 @@ public class Reservation {
             return totalCost;
         }
 
-        public String getEndDate() {
+        public LocalDate getEndDate() {
             return endDate;
         }
 
@@ -116,5 +123,18 @@ public class Reservation {
                         "  Total Cost: %.2f%n",
                 reservationId, carId, startDate, endDate, customerName, customerEmail, totalCost);
     }
+
+    public void setDiscountStrategy(DiscountStrategy discountStrategy) {
+        this.discountStrategy = discountStrategy;
+    }
+
+    public double calculateTotalCostWithDiscount(double totalCost) {
+        if (discountStrategy != null) {
+            return discountStrategy.applyDiscount(totalCost);
+        }
+        return totalCost; // No discount strategy set
+    }
+
+
     }
 
