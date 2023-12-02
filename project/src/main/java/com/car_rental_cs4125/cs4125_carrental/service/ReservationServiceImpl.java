@@ -23,7 +23,7 @@ public ReservationServiceImpl(ReservationRepositoryImpl reservationRepositoryImp
     //Strategy Pattern
     public double calculateTotalCost(LocalDate startDate, LocalDate endDate, double pricePerDay) {
         // Parse start_date and end_date to LocalDate objects (assuming they are in "yyyy-MM-dd" format)
-        long numberOfDays = ChronoUnit.DAYS.between(startDate, endDate) + 1;
+        long numberOfDays = ChronoUnit.DAYS.between(startDate, endDate) ;
         double totalCost = numberOfDays * pricePerDay;
 
         // Apply discount logic directly
