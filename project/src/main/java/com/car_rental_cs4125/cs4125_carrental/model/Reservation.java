@@ -1,8 +1,7 @@
 package com.car_rental_cs4125.cs4125_carrental.model;
 
-import com.car_rental_cs4125.cs4125_carrental.repository.DiscountStrategy;
+import com.car_rental_cs4125.cs4125_carrental.service.DiscountStrategy;
 import jakarta.persistence.*;
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 
@@ -130,7 +129,7 @@ public class Reservation {
 
     public double calculateTotalCostWithDiscount(double totalCost) {
         if (discountStrategy != null) {
-            return discountStrategy.applyDiscount(totalCost);
+            return discountStrategy.applyFiveDay(totalCost);
         }
         return totalCost; // No discount strategy set
     }

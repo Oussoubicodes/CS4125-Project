@@ -1,5 +1,7 @@
 package com.car_rental_cs4125.cs4125_carrental.model;
 
+import com.car_rental_cs4125.cs4125_carrental.service.CarServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +15,10 @@ import java.util.List;
 @RequestMapping("/manageCars")
 public class AdminManageCarsController {
 
+    @Autowired
     private CarRepositoryImpl carRepoImpl;
+    @Autowired
+    private CarServiceImpl carServiceImpl;
 
     // Constructor injection
     public AdminManageCarsController(CarRepositoryImpl carRepoImpl) {
@@ -49,11 +54,11 @@ public class AdminManageCarsController {
     public String handleCarFormSubmit(@ModelAttribute("car") Car car, @RequestParam String action) {
         try {
             if ("add".equals(action)) {
-                carRepoImpl.addCar(car);
+                carServiceImpl.addCar(car);
             } else if ("update".equals(action)) {
-                carRepoImpl.updateCar(car);
+                carServiceImpl.updateCar(car);
             } else if ("remove".equals(action)) {
-                carRepoImpl.removeCar(car.getId());
+                carServiceImpl.removeCar(car.getId());
             }
         } catch (IOException e) {
             // Handle exception
@@ -82,7 +87,7 @@ public class AdminManageCarsController {
     @GetMapping("/removeCar")
     public String removeCar(@RequestParam("id") int carId, Model model) {
         try {
-            carRepoImpl.removeCar(carId);
+            carServiceImpl.removeCar(carId);
             model.addAttribute("carId", carId);
         } catch (IOException e) {
             // Handle exception
