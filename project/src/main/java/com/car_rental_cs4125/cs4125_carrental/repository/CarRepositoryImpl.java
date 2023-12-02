@@ -60,38 +60,6 @@ public class CarRepositoryImpl implements CarRepository {
         return null;
     }
 
-    @Override
-    public void addCar(Car car) throws IOException {
-        List<Car> cars = getAllCars();
-        cars.add(car);
-        writeCarsToCSV(cars);
-    }
-
-    @Override
-    public void removeCar(int id) throws IOException {
-        List<Car> cars = getAllCars();
-        Iterator<Car> iterator = cars.iterator();
-        while (iterator.hasNext()) {
-            Car car = iterator.next();
-            if (car.getId() == id) {
-                iterator.remove();
-                writeCarsToCSV(cars);
-                return;
-            }
-        }
-    }
-
-    @Override
-    public void updateCar(Car updatedCar) throws IOException {
-        List<Car> cars = getAllCars();
-        for (int i = 0; i < cars.size(); i++) {
-            if (cars.get(i).getId() == updatedCar.getId()) {
-                cars.set(i, updatedCar);
-                writeCarsToCSV(cars);
-                return;
-            }
-        }
-    }
 
     public List<Car> searchCars(String make, String type) {
         // Perform the search based on the provided criteria
@@ -103,7 +71,7 @@ public class CarRepositoryImpl implements CarRepository {
         return filteredCars;
     }
 
-    private void writeCarsToCSV(List<Car> cars) throws IOException {
+    public void writeCarsToCSV(List<Car> cars) throws IOException {
         try (Writer writer = new FileWriter(CSV_CARFILE);
                 CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT.withHeader())) {
             for (Car car : cars) {

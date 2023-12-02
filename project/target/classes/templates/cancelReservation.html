@@ -80,7 +80,7 @@
             <strong>End Date:</strong> <span th:text="${reservation.endDate}"></span><br>
             <!-- Cancel Button -->
         <form action="/cancelReservation" method="post">
-            <input type="hidden" name="id" th:value="${reservation.reservationId}">
+            <input type="hidden" name="reservationId" th:value="${reservation.reservationId}">
             <button class="cancel-button" type="submit">Cancel</button>
         </form>
         </p>

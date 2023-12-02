@@ -5,6 +5,7 @@ import com.car_rental_cs4125.cs4125_carrental.model.Reservation;
 import com.car_rental_cs4125.cs4125_carrental.repository.CarRepositoryImpl;
 import com.car_rental_cs4125.cs4125_carrental.repository.ReservationRepository;
 import com.car_rental_cs4125.cs4125_carrental.repository.ReservationRepositoryImpl;
+import com.car_rental_cs4125.cs4125_carrental.service.ReservationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,9 @@ public class ReservationController {
 
     @Autowired
     private ReservationRepositoryImpl reservationRepositoryImpl;
+
+    @Autowired
+    private ReservationServiceImpl reservationServiceImpl;
 
     @Autowired
     private CarRepositoryImpl carRepositoryImpl;
@@ -44,7 +48,7 @@ public class ReservationController {
                              RedirectAttributes redirectAttributes) throws IOException {
 
         // Check availability using startDate and endDate
-        boolean isAvailable = reservationRepositoryImpl.checkAvailability(reservation.getCarId(), startDate, endDate);
+        boolean isAvailable = reservationServiceImpl.checkAvailability(reservation.getCarId(), startDate, endDate);
 
         if (isAvailable) {
             // Create a new reservation using the repository method
@@ -62,7 +66,7 @@ public class ReservationController {
 
             // Calculate total cost
             double pricePerDay = selectedCar.getPricePerDay();
-            double totalCost = reservationRepositoryImpl.calculateTotalCost(startDate, endDate, pricePerDay);
+            double totalCost = reservationServiceImpl.calculateTotalCost(startDate, endDate, pricePerDay);
             newReservation.setTotalCost(totalCost);
 
             // Add the new reservation
@@ -118,7 +122,7 @@ public class ReservationController {
 
 
     @GetMapping("/searchReservations")
-    public String searchReservations(@RequestParam(name = "reservationId", required = false) int reservationId,
+    public String searchReservations(@RequestParam(name = "reservationId", required = false) Integer reservationId,
                                      @RequestParam(name = "customerName", required = false) String customerName,
                                      Model model) throws IOException {
         // Get the list of reservations based on the search criteria
@@ -134,8 +138,8 @@ public class ReservationController {
     }
 
     @PostMapping("/cancelReservation")
-    public String cancelReservation(@RequestParam("id") int reservationId) throws IOException {
-        reservationRepositoryImpl.cancelReservation(reservationId);
+    public String cancelReservation(@RequestParam("reservationId") int reservationId) throws IOException {
+        reservationServiceImpl.cancelReservation(reservationId);
         return "redirect:/searchReservations"; // Redirect to the search results page
     }
 
