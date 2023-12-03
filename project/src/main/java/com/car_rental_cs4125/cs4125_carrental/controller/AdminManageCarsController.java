@@ -16,14 +16,14 @@ import java.util.List;
 @RequestMapping("/manageCars")
 public class AdminManageCarsController {
 
-    @Autowired
+    
     private CarRepositoryImpl carRepoImpl;
-    @Autowired
     private CarServiceImpl carServiceImpl;
 
-    // Constructor injection
-    public AdminManageCarsController(CarRepositoryImpl carRepoImpl) {
+    @Autowired
+    public AdminManageCarsController(CarRepositoryImpl carRepoImpl, CarServiceImpl carServiceImpl) {
         this.carRepoImpl = carRepoImpl;
+        this.carServiceImpl = carServiceImpl;
     }
 
     @GetMapping
