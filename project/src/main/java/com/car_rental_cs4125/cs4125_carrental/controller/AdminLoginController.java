@@ -1,6 +1,7 @@
 package com.car_rental_cs4125.cs4125_carrental.controller;
 
-import com.car_rental_cs4125.cs4125_carrental.repository.AdminRepositoryImpl;
+import com.car_rental_cs4125.cs4125_carrental.service.AdminService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,11 +12,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class AdminLoginController {
 
-    private AdminRepositoryImpl adminRepositoryImpl;
+    private AdminService adminService;
 
     @Autowired
-    public AdminLoginController(AdminRepositoryImpl adminRepositoryImpl) {
-        this.adminRepositoryImpl = adminRepositoryImpl;
+    public AdminLoginController(AdminService adminService) {
+        this.adminService = adminService;
     }
 
     @GetMapping("/adminLogin")
@@ -25,7 +26,7 @@ public class AdminLoginController {
 
     @PostMapping("/adminLogin")
     public ModelAndView login(@RequestParam("username") String username, @RequestParam("password") String password) {
-        boolean isValid = adminRepositoryImpl.authenticate(username, password);
+        boolean isValid = adminService.authenticate(username, password);
         ModelAndView modelAndView = new ModelAndView("adminLogin");
         if (isValid) {
             modelAndView.setViewName("redirect:/manageCars");

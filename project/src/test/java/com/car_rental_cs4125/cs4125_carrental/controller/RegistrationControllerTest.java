@@ -12,16 +12,16 @@ import org.junit.jupiter.api.Test;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.car_rental_cs4125.cs4125_carrental.model.Customer;
-import com.car_rental_cs4125.cs4125_carrental.repository.CustomerRepositoryImpl;
+import com.car_rental_cs4125.cs4125_carrental.service.CustomerServiceImpl;
 
 class RegistrationControllerTest {
-    private CustomerRepositoryImpl customerRepositoryImpl;
+    private CustomerServiceImpl customerServiceImpl;
     private RegisterController registerController;
 
     @BeforeEach
     void setUp() {
-        customerRepositoryImpl = mock(CustomerRepositoryImpl.class);
-        registerController = new RegisterController(customerRepositoryImpl);
+        customerServiceImpl = mock(CustomerServiceImpl.class);
+        registerController = new RegisterController(customerServiceImpl);
     }
 
     @Test
@@ -34,17 +34,17 @@ class RegistrationControllerTest {
     @Test
     void testRegisterWithValidCustomer() {
         Customer validCustomer = new Customer();
-        when(customerRepositoryImpl.isCustomerValid(validCustomer)).thenReturn(true);
+        when(customerServiceImpl.isCustomerValid(validCustomer)).thenReturn(true);
 
         ModelAndView modelAndView = registerController.register(validCustomer);
         assertEquals("redirect:/login", modelAndView.getViewName());
-        verify(customerRepositoryImpl, times(1)).addCustomerToCSV(validCustomer);
+        verify(customerServiceImpl, times(1)).addCustomerToCSV(validCustomer);
     }
 
     @Test
     void testRegisterWithInvalidCustomer() {
         Customer invalidCustomer = new Customer();
-        when(customerRepositoryImpl.isCustomerValid(invalidCustomer)).thenReturn(false);
+        when(customerServiceImpl.isCustomerValid(invalidCustomer)).thenReturn(false);
 
         ModelAndView modelAndView = registerController.register(invalidCustomer);
         assertEquals("registration", modelAndView.getViewName());

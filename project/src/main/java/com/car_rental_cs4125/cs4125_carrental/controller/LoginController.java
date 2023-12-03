@@ -7,16 +7,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.car_rental_cs4125.cs4125_carrental.repository.CustomerRepositoryImpl;
+import com.car_rental_cs4125.cs4125_carrental.service.CustomerServiceImpl;
 
 @Controller
 public class LoginController {
 
-    private CustomerRepositoryImpl customerRepoImpl;
+    private CustomerServiceImpl customerServiceImpl;
 
     @Autowired
-    public LoginController(CustomerRepositoryImpl customerRepoImpl) {
-        this.customerRepoImpl = customerRepoImpl;
+    public LoginController(CustomerServiceImpl customerServiceImpl) {
+        this.customerServiceImpl = customerServiceImpl;
     }
 
     @GetMapping("/login")
@@ -26,7 +26,7 @@ public class LoginController {
 
     @PostMapping("/login")
     public ModelAndView login(@RequestParam("username") String username, @RequestParam("password") String password) {
-        boolean isValid = customerRepoImpl.authenticate(username, password);
+        boolean isValid = customerServiceImpl.authenticate(username, password);
         ModelAndView modelAndView = new ModelAndView("login");
         if (isValid) {
             modelAndView.setViewName("redirect:/home"); // Redirect to home page on successful login

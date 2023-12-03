@@ -1,170 +1,176 @@
 package com.car_rental_cs4125.cs4125_carrental.repository;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Function;
 
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
 import org.springframework.stereotype.Repository;
 
+import com.car_rental_cs4125.cs4125_carrental.errors.CustomerAlreadyExistsException;
 import com.car_rental_cs4125.cs4125_carrental.model.Customer;
 
 @Repository
 public class CustomerRepositoryImpl implements CustomerRepository {
+    String findAllMessage = "Unimplemented method 'findAll'";
 
-    private static final String FILE_PATH = "project\\src\\main\\resources\\users.csv";
-
-    private List<Customer> customers = new ArrayList<>();
-    private List<CustomerRepositoryObserver> observers = new ArrayList<>();
-
-
-    public CustomerRepositoryImpl() {
-        this.customers = loadUsersFromCSV(FILE_PATH);
+    @Override
+    public void flush() {
+        throw new UnsupportedOperationException("Unimplemented method 'flush'");
     }
 
-    public List<Customer> loadUsersFromCSV(String filePath) {
+    @Override
+    public <S extends Customer> S saveAndFlush(S entity) {
+        throw new UnsupportedOperationException("Unimplemented method 'saveAndFlush'");
+    }
 
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] data = line.split(","); // Assuming CSV values are separated by commas
+    @Override
+    public <S extends Customer> List<S> saveAllAndFlush(Iterable<S> entities) {
+        throw new UnsupportedOperationException("Unimplemented method 'saveAllAndFlush'");
+    }
 
-                if (data.length >= 2) { // Assuming the first element is username and second is password
-                    String username = data[0];
-                    String password = data[1];
+    @Override
+    public void deleteAllInBatch(Iterable<Customer> entities) {
+        throw new UnsupportedOperationException("Unimplemented method 'deleteAllInBatch'");
+    }
 
-                    // Create Customer object
-                    Customer customer = new Customer();
-                    customer.setUsername(username); // Set username using the setter method
-                    customer.setPassword(password); // Set password using the setter method
+    @Override
+    public void deleteAllByIdInBatch(Iterable<Long> ids) {
+        throw new UnsupportedOperationException("Unimplemented method 'deleteAllByIdInBatch'");
+    }
 
-                    // Add the created customer to the list
-                    customers.add(customer);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace(); // Handle or log the exception as required
-        }
+    @Override
+    public void deleteAllInBatch() {
+        throw new UnsupportedOperationException("Unimplemented method 'deleteAllInBatch'");
+    }
 
-        return customers;
+    @Override
+    public Customer getOne(Long id) {
+        throw new UnsupportedOperationException("Unimplemented method 'getOne'");
+    }
+
+    @Override
+    public Customer getById(Long id) {
+        throw new UnsupportedOperationException("Unimplemented method 'getById'");
+    }
+
+    @Override
+    public Customer getReferenceById(Long id) {
+        throw new UnsupportedOperationException("Unimplemented method 'getReferenceById'");
+    }
+
+    @Override
+    public <S extends Customer> List<S> findAll(Example<S> example) {
+        throw new UnsupportedOperationException(findAllMessage);
+    }
+
+    @Override
+    public <S extends Customer> List<S> findAll(Example<S> example, Sort sort) {
+        throw new UnsupportedOperationException(findAllMessage);
+    }
+
+    @Override
+    public List<Customer> findAllById(Iterable<Long> ids) {
+        throw new UnsupportedOperationException("Unimplemented method 'findAllById'");
+    }
+
+    @Override
+    public <S extends Customer> List<S> saveAll(Iterable<S> entities) {
+        throw new UnsupportedOperationException("Unimplemented method 'saveAll'");
+    }
+
+    @Override
+    public long count() {
+        throw new UnsupportedOperationException("Unimplemented method 'count'");
+    }
+
+    @Override
+    public void delete(Customer entity) {
+        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+    }
+
+    @Override
+    public void deleteAll() {
+        throw new UnsupportedOperationException("Unimplemented method 'deleteAll'");
+    }
+
+    @Override
+    public void deleteAll(Iterable<? extends Customer> entities) {
+        throw new UnsupportedOperationException("Unimplemented method 'deleteAll'");
+    }
+
+    @Override
+    public void deleteAllById(Iterable<? extends Long> ids) {
+        throw new UnsupportedOperationException("Unimplemented method 'deleteAllById'");
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        throw new UnsupportedOperationException("Unimplemented method 'deleteById'");
+    }
+
+    @Override
+    public boolean existsById(Long id) {
+        throw new UnsupportedOperationException("Unimplemented method 'existsById'");
+    }
+
+    @Override
+    public Optional<Customer> findById(Long id) {
+        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+    }
+
+    @Override
+    public <S extends Customer> S save(S entity) {
+        throw new UnsupportedOperationException("Unimplemented method 'save'");
+    }
+
+    @Override
+    public List<Customer> findAll(Sort sort) {
+        throw new UnsupportedOperationException(findAllMessage);
+    }
+
+    @Override
+    public Page<Customer> findAll(Pageable pageable) {
+        throw new UnsupportedOperationException(findAllMessage);
+    }
+
+    @Override
+    public <S extends Customer> long count(Example<S> example) {
+        throw new UnsupportedOperationException("Unimplemented method 'count'");
+    }
+
+    @Override
+    public <S extends Customer> boolean exists(Example<S> example) {
+        throw new UnsupportedOperationException("Unimplemented method 'exists'");
+    }
+
+    @Override
+    public <S extends Customer> Page<S> findAll(Example<S> example, Pageable pageable) {
+        throw new UnsupportedOperationException(findAllMessage);
+    }
+
+    @Override
+    public <S extends Customer, R> R findBy(Example<S> example, Function<FetchableFluentQuery<S>, R> queryFunction) {
+        throw new UnsupportedOperationException("Unimplemented method 'findBy'");
+    }
+
+    @Override
+    public <S extends Customer> Optional<S> findOne(Example<S> example) {
+        throw new UnsupportedOperationException("Unimplemented method 'findOne'");
     }
 
     @Override
     public List<Customer> findAll() {
-        return customers;
-    }
-
-    public Customer findByUsername(String username) {
-        if (username != null) {
-            /**  Query csv to find the user by username **/
-            
-            for (Customer customer : customers) {
-                if (username.equals(customer.getUsername())) { // Ensure 'username' is not null before comparison
-                    return customer;
-                }
-            }
-        }
-        return null;
+        throw new UnsupportedOperationException(findAllMessage);
     }
 
     @Override
-    public boolean authenticate(String username, String password) {
-        // Load user data from the CSV file or stored list
-        List<Customer> customerList = loadUsersFromCSV(FILE_PATH);
-
-        for (Customer customer : customerList) {
-            if (customer.getUsername().equals(username) && customer.getPassword().equals(password)) {
-                return true; // Authentication successful
-            }
-        }
-        return false; // Authentication failed
-    }
-
-    // add a new customer to the CSV file
-    @Override
-    public void addCustomerToCSV(Customer customer) {
-        if (isCustomerValid(customer)) {
-            try (FileWriter writer = new FileWriter(FILE_PATH, true)) {
-                writer.append(String.format("%s,%s\n", customer.getUsername(), customer.getPassword()));
-            } catch (IOException e) {
-                // Handling the IOException
-                e.printStackTrace();
-            }
-        } else {
-            // in case the customer details are invalid
-            throw new IllegalArgumentException("Invalid customer details provided");
-        }
-    }
-
-    @Override
-    public boolean isCustomerValid(Customer customer) {
-        if (customer.getUsername() == null || customer.getUsername().isEmpty()) {
-            return false; // username shouldn't be null or empty
-        }
-        if (customer.getPassword() == null || customer.getPassword().length() < 8) {
-            return false;
-        }
-        if (!customer.getUsername().matches("^[a-zA-Z0-9._-]{3,}$")) {
-            return false;
-        }
-        return customer.getPassword().matches(".*\\d.*");
-    }
-
-    @Override
-    public void addObserver(CustomerRepositoryObserver observer) {
-        observers.add(observer);
-    }
-
-    @Override
-    public void removeObserver(CustomerRepositoryObserver observer) {
-        observers.remove(observer);
-    }
-
-    //create customer using factory method
-    @Override
-    public Customer createCustomer(String username, String password) {
-    
-        // Create a new Customer object
-        Customer customer = new Customer();
-        customer.setUsername(username);
-        customer.setPassword(password);
-        notifyObservers(customer);
-    
-        // Add the customer to the CSV file
-        addCustomerToCSV(customer);
-    
-        return customer;
-    }
-
-public boolean isCustomerValid(String username) {
-    // Read the CSV file and check if the username exists
-    try {
-        BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH));
-        String line;
-        while ((line = reader.readLine()) != null) {
-            String[] customerData = line.split(",");
-            String existingUsername = customerData[0];
-            if (existingUsername.equals(username)) {
-                reader.close();
-                return false;
-            }
-        }
-        reader.close();
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-
-    // Return true if the username doesn't exist, false otherwise
-    return true;
-}
-
-
-    private void notifyObservers(Customer customer){
-        for (CustomerRepositoryObserver observer: observers) {
-            observer.onCustomerAdded(customer);
-        } 
+    public Customer createCustomer(String username, String password) throws CustomerAlreadyExistsException {
+        throw new UnsupportedOperationException("Unimplemented method 'createCustomer'");
     }
 
 }

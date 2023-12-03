@@ -11,41 +11,42 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.car_rental_cs4125.cs4125_carrental.model.Customer;
+import com.car_rental_cs4125.cs4125_carrental.service.CustomerServiceImpl;
 
 class CustomerRepositoryImplTest {
 
-    private CustomerRepositoryImpl customerRepoImpl;
+    private CustomerServiceImpl customerServiceImpl;
     private final String testFilePath = "project\\src\\main\\resources\\users.csv"; // Adjust the test file path as needed
 
     @BeforeEach
     public void setUp() {
-        customerRepoImpl = new CustomerRepositoryImpl();
+        customerServiceImpl = new CustomerServiceImpl();
     }
 
     @Test
     void testLoadUsersFromCSV() {
-        List<Customer> customers = customerRepoImpl.loadUsersFromCSV(testFilePath);
+        List<Customer> customers = customerServiceImpl.loadUsersFromCSV(testFilePath);
         assertNotNull(customers);
         // Add more assertions based on the expected behavior
     }
 
     @Test
     void testFindAll() {
-        List<Customer> customers = customerRepoImpl.findAll();
+        List<Customer> customers = customerServiceImpl.findAll();
         assertNotNull(customers);
         // Add more assertions based on the expected behavior
     }
 
     @Test
     void testFindByUsername() {
-        Customer foundCustomer = customerRepoImpl.findByUsername("testUsername");
+        Customer foundCustomer = customerServiceImpl.findByUsername("testUsername");
         assertNull(foundCustomer); // Assuming "testUsername" is not present in the test data
         // Add more assertions based on the expected behavior
     }
 
     @Test
     void testAuthenticate() {
-        boolean authenticated = customerRepoImpl.authenticate("testUsername", "testPassword");
+        boolean authenticated = customerServiceImpl.authenticate("testUsername", "testPassword");
         assertFalse(authenticated); // Assuming "testUsername" and "testPassword" are not in the test data
         // Add more assertions based on the expected behavior
     }
@@ -56,7 +57,7 @@ class CustomerRepositoryImplTest {
         customer.setUsername("newUser");
         customer.setPassword("password123");
 
-        assertDoesNotThrow(() -> customerRepoImpl.addCustomerToCSV(customer));
+        assertDoesNotThrow(() -> customerServiceImpl.addCustomerToCSV(customer));
         // Add more assertions based on the expected behavior
     }
 
@@ -66,7 +67,7 @@ class CustomerRepositoryImplTest {
         invalidCustomer.setUsername("acceptableUsername");
         invalidCustomer.setPassword("accept");
 
-        assertFalse(customerRepoImpl.isCustomerValid(invalidCustomer));
+        assertFalse(customerServiceImpl.isCustomerValid(invalidCustomer));
         // Add more assertions based on the expected behavior
     }
 }

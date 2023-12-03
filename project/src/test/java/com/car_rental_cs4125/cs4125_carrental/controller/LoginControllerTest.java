@@ -9,23 +9,23 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.car_rental_cs4125.cs4125_carrental.repository.CustomerRepositoryImpl;
+import com.car_rental_cs4125.cs4125_carrental.service.CustomerServiceImpl;
 
 class LoginControllerTest {
-    private CustomerRepositoryImpl customerRepositoryImpl;
+    private CustomerServiceImpl customerServiceImpl;
     private LoginController loginController;
 
     @BeforeEach
     public void setUp() {
-        customerRepositoryImpl = mock(CustomerRepositoryImpl.class);
-        loginController = new LoginController(customerRepositoryImpl);
+        customerServiceImpl = mock(CustomerServiceImpl.class);
+        loginController = new LoginController(customerServiceImpl);
     }
 
     @Test
     void testLoginWithValidCredentials() {
         String username = "testUser";
         String password = "testPassword";
-        when(customerRepositoryImpl.authenticate(username, password)).thenReturn(true);
+        when(customerServiceImpl.authenticate(username, password)).thenReturn(true);
 
         ModelAndView modelAndView = loginController.login(username, password);
         assertEquals("redirect:/home", modelAndView.getViewName());
@@ -35,7 +35,7 @@ class LoginControllerTest {
     void testLoginWithInvalidCredentials() {
         String username = "testUser";
         String password = "testPassword";
-        when(customerRepositoryImpl.authenticate(username, password)).thenReturn(false);
+        when(customerServiceImpl.authenticate(username, password)).thenReturn(false);
 
         ModelAndView modelAndView = loginController.login(username, password);
         assertEquals("login", modelAndView.getViewName());
