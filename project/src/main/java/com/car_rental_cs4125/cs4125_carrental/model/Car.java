@@ -20,7 +20,7 @@ public class Car {
     private double pricePerDay;
 
     //constructor to use the builder pattern
-    Car() {
+    public Car() {
         
     }
 

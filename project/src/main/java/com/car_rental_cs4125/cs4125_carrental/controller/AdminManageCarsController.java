@@ -1,4 +1,4 @@
-package com.car_rental_cs4125.cs4125_carrental.model;
+package com.car_rental_cs4125.cs4125_carrental.controller;
 
 import com.car_rental_cs4125.cs4125_carrental.service.CarServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import com.car_rental_cs4125.cs4125_carrental.model.Car;
 import com.car_rental_cs4125.cs4125_carrental.repository.CarRepositoryImpl;
 
 import java.io.IOException;
